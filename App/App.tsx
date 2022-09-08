@@ -1,14 +1,13 @@
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Lato_400Regular } from '@expo-google-fonts/lato';
 import { Oswald_400Regular } from '@expo-google-fonts/oswald';
-import AppTabs from './AppTabs';
-import styles from './App.styles';
 import { RestaurantsContextProvider } from '../src/services/restaurant/restaurants.context';
 import { LocationContextProvider } from '../src/services/location/location.context';
+import Navigation from './Navigation';
+import styles from './App.styles';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,9 +31,7 @@ const App = () => {
     <View style={styles.container} onLayout={onLayoutRootView}>
       <LocationContextProvider>
         <RestaurantsContextProvider>
-          <NavigationContainer>
-            <AppTabs />
-          </NavigationContainer>
+          <Navigation />
         </RestaurantsContextProvider>
       </LocationContextProvider>
       <StatusBar style="auto" />

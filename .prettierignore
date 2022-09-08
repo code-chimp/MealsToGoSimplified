@@ -1,0 +1,16 @@
+/.git
+/.expo
+/.expo-shared
+/.idea
+/.vscode
+/node_modules
+/assets
+.gitignore
+.eslintignore
+.prettierignore
+.prettierrc
+yarn.lock
+LICENSE
+*.snap
+*.txt
+*.back

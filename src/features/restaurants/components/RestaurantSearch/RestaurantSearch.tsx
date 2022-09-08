@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { LocationContext } from '../../../../services/location/location.context';
-import styles from './Search.styles';
+import styles from './RestaurantSearch.styles';
 
-const Search = () => {
+const RestaurantSearch: FC = () => {
   const { keyword, search } = useContext(LocationContext);
   const [searchTerm, setSearchTerm] = useState<string>(keyword);
 
@@ -20,4 +20,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default RestaurantSearch;

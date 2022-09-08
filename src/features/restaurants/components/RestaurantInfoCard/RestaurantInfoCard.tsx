@@ -2,16 +2,16 @@ import React, { FC } from 'react';
 import { Image, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
-import styles from './InfoCard.styles';
+import styles from './RestaurantInfoCard.styles';
 import openSvgXml from '../../../../assets/openSvgXml';
 import starSvgXml from '../../../../assets/starSvgXml';
 import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
 
-export interface IInfoCardProps {
+export interface IRestaurantInfoCardProps {
   restaurant: IRestaurant;
 }
 
-const InfoCard: FC<IInfoCardProps> = ({ restaurant }) => {
+const RestaurantInfoCard: FC<IRestaurantInfoCardProps> = ({ restaurant }) => {
   const {
     name,
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
@@ -48,4 +48,4 @@ const InfoCard: FC<IInfoCardProps> = ({ restaurant }) => {
   );
 };
 
-export default InfoCard;
+export default RestaurantInfoCard;
