@@ -12,7 +12,15 @@ export interface IInfoCardProps {
 }
 
 const InfoCard: FC<IInfoCardProps> = ({ restaurant }) => {
-  const { name, icon, photos, address, rating, isOpenNow, isClosedTemporarily } = restaurant;
+  const {
+    name,
+    icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
+    photos,
+    vicinity,
+    rating = 0,
+    isOpenNow,
+    isClosedTemporarily,
+  } = restaurant;
 
   return (
     <Card style={styles.card} elevation={5}>
@@ -33,7 +41,7 @@ const InfoCard: FC<IInfoCardProps> = ({ restaurant }) => {
             <Image style={styles.icon} source={{ uri: icon }} />
           </View>
         </View>
-        <Text style={styles.address}>{address}</Text>
+        <Text style={styles.address}>{vicinity}</Text>
       </View>
     </Card>
   );

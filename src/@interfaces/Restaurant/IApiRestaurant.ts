@@ -1,5 +1,5 @@
-interface IRestaurant {
-  businessStatus?: string;
+interface IApiRestaurant {
+  business_status?: string;
   geometry: {
     location: {
       lat: number;
@@ -17,23 +17,21 @@ interface IRestaurant {
     };
   };
   icon?: string;
-  isClosedTemporarily: boolean;
-  isOpenNow: boolean;
   name: string;
-  openingHours?: {
-    openNow?: boolean;
+  opening_hours?: {
+    open_now?: boolean;
   };
-  permanentlyClosed?: boolean;
+  permanently_closed?: boolean;
   photos: Array<any>;
-  placeId: string;
-  plusCode?: any;
-  priceLevel?: number;
+  place_id: string;
+  plus_code?: any;
+  price_level?: number;
   rating?: number;
   reference: string;
   scope?: string;
   types?: Array<string>;
-  userRatingsTotal?: number;
+  user_ratings_total?: number;
   vicinity: string;
 }
 
-export default IRestaurant;
+export default IApiRestaurant;
