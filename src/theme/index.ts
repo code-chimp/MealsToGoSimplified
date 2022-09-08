@@ -15,6 +15,8 @@ const theme: ITheme = {
       disabled: '#DEDEDE',
       error: '#D0421B',
       success: '#138000',
+      activeIcon: 'tomato',
+      inactiveIcon: 'gray',
     },
     bg: {
       primary: '#FFFFFF',

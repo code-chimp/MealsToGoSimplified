@@ -1,16 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { FlatList, SafeAreaView, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
 import InfoCard from '../../components/InfoCard';
 import styles from './Restaurants.styles';
 
-export interface IRestaurantsProps {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-}
+const Restaurants: FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-const Restaurants: FC<IRestaurantsProps> = ({ searchQuery, setSearchQuery }) => {
   const mockData: Array<IRestaurant> = [
     {
       name: 'Some Restaurant',

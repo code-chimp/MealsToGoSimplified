@@ -25,6 +25,8 @@ interface IColors {
       disabled: string;
       error: string;
       success: string;
+      activeIcon: string;
+      inactiveIcon: string;
     };
   };
 }
