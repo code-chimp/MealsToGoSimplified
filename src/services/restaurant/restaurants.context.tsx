@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect, ReactNode } from 'react';
 
-import { restaurantsRequest, restaurantsTranform } from './restaurants.service';
+import { restaurantsRequest, restaurantsTransform } from './restaurants.service';
 import IRestaurant from '../../@interfaces/Restaurant/IRestaurant';
 
 export interface IRestaurantContext {
@@ -24,7 +24,7 @@ export const RestaurantsContextProvider = ({ children }: { children: ReactNode }
     setIsLoading(true);
     setTimeout(() => {
       restaurantsRequest()
-        .then(restaurantsTranform)
+        .then(restaurantsTransform)
         .then((rs: Array<IRestaurant>) => {
           setRestaurants(rs);
           setIsLoading(false);

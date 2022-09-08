@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
   searchContainer: {
     padding: theme.space.md,
   },
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   restaurantsList: {
     padding: theme.space.md,
   },

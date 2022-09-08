@@ -8,6 +8,7 @@ import { Oswald_400Regular } from '@expo-google-fonts/oswald';
 import AppTabs from './AppTabs';
 import styles from './App.styles';
 import { RestaurantsContextProvider } from '../src/services/restaurant/restaurants.context';
+import { LocationContextProvider } from '../src/services/location/location.context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,11 +30,13 @@ const App = () => {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <RestaurantsContextProvider>
-        <NavigationContainer>
-          <AppTabs />
-        </NavigationContainer>
-      </RestaurantsContextProvider>
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <AppTabs />
+          </NavigationContainer>
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
       <StatusBar style="auto" />
     </View>
   );
