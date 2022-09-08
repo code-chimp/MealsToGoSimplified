@@ -4,6 +4,7 @@ import theme from '../../../../theme';
 const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.bg.secondary,
+    marginBottom: theme.space.sm,
   },
   cardImage: {
     padding: theme.space.md,

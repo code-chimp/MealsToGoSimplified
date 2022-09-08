@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     padding: theme.space.md,
   },
-  restaurantsContainer: {
-    flex: 1,
+  restaurantsList: {
     padding: theme.space.md,
   },
 });
