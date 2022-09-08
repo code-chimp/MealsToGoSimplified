@@ -4,9 +4,7 @@ import IApiRestaurant from '../../@interfaces/Restaurant/IApiRestaurant';
 import IRestaurant from '../../@interfaces/Restaurant/IRestaurant';
 import { restaurantsApiResponses, mockImages } from '../../@mocks/restaurantsApiResponses';
 
-export const restaurantsRequest = (
-  location = '37.7749295,-122.4194155',
-): Promise<IRestaurantsApiResponse> => {
+export const restaurantsRequest = (location: string): Promise<IRestaurantsApiResponse> => {
   return new Promise((resolve, reject) => {
     const response = restaurantsApiResponses[location];
 

@@ -20,6 +20,7 @@ const InfoCard: FC<IInfoCardProps> = ({ restaurant }) => {
     rating = 0,
     isOpenNow,
     isClosedTemporarily,
+    placeId,
   } = restaurant;
 
   return (
@@ -30,7 +31,7 @@ const InfoCard: FC<IInfoCardProps> = ({ restaurant }) => {
         <View style={styles.row}>
           <View style={styles.rating}>
             {Array.from(new Array(Math.floor(rating))).map((k, i) => (
-              <SvgXml key={i} xml={starSvgXml} width={16} height={16} />
+              <SvgXml key={`${placeId}_${i}`} xml={starSvgXml} width={16} height={16} />
             ))}
           </View>
           <View style={styles.info}>

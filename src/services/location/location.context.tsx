@@ -1,5 +1,5 @@
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import IMapCoords from '../../@interfaces/Geo/IMapCoords';
-import { createContext, ReactNode, useEffect, useState } from 'react';
 import { locationRequest, locationTransform } from './location.service';
 
 export interface ILocationContext {
@@ -11,7 +11,7 @@ export interface ILocationContext {
 }
 
 export const LocationContext = createContext<ILocationContext>({
-  keyword: 'san francisco',
+  keyword: 'San Francisco',
   search: (s: string) => {
     console.log(s);
   },
@@ -21,32 +21,30 @@ export const LocationContext = createContext<ILocationContext>({
 });
 
 export const LocationContextProvider = ({ children }: { children: ReactNode }) => {
-  const [keyword, setKeyword] = useState<string>('san francisco');
+  const [keyword, setKeyword] = useState<string>('San Francisco');
   const [location, setLocation] = useState<IMapCoords | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
   const onSearch = (searchTerm: string) => {
     setIsLoading(true);
-
-    const st = searchTerm.toLowerCase();
-    setKeyword(st);
-
-    locationRequest(st)
-      .then(locationTransform)
-      .then(loc => {
-        setLocation(loc);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setIsLoading(false);
-      });
+    setKeyword(searchTerm);
   };
 
   useEffect(() => {
-    onSearch(keyword);
-  }, []);
+    if (keyword.length) {
+      locationRequest(keyword.toLowerCase())
+        .then(locationTransform)
+        .then(loc => {
+          setLocation(loc);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          setError(err);
+          setIsLoading(false);
+        });
+    }
+  }, [keyword]);
 
   return (
     <LocationContext.Provider
