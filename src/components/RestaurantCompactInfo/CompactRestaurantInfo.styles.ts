@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.heading,
     alignSelf: 'center',
   },
+  webviewWrapper: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    width: 120,
+    height: 100,
+    padding: theme.space.none,
+  },
 });
 
 export default styles;

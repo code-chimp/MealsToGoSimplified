@@ -14,7 +14,9 @@ const CompactRestaurantInfo: FC<ICompactRestaurantInfoProps> = ({ restaurant }) 
   return (
     <View style={styles.container}>
       {isAndroid ? (
-        <WebView style={styles.image} source={{ uri: restaurant.photos[0] }} />
+        <View style={styles.webviewWrapper}>
+          <WebView style={styles.image} source={{ uri: restaurant.photos[0] }} />
+        </View>
       ) : (
         <Image style={styles.image} source={{ uri: restaurant.photos[0] }} />
       )}

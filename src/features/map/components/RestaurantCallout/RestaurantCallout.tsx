@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
 import { Callout } from 'react-native-maps';
+import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
 import CompactRestaurantInfo from '../../../../components/RestaurantCompactInfo';
 
 export interface IRestaurantCalloutProps {
   restaurant: IRestaurant;
+  onPress: () => void;
 }
 
-const RestaurantCallout: FC<IRestaurantCalloutProps> = ({ restaurant }) => {
+const RestaurantCallout: FC<IRestaurantCalloutProps> = ({ restaurant, onPress }) => {
   return (
-    <Callout>
+    <Callout onPress={onPress}>
       <CompactRestaurantInfo restaurant={restaurant} />
     </Callout>
   );

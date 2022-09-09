@@ -1,13 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import MapSearch from '../../components/MapSearch';
-import RestaurantCallout from '../../components/RestaurantCallout';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../../../App/Navigation/AppTabs/RestaurantNavigator';
 import { LocationContext } from '../../../../services/location/location.context';
 import { RestaurantsContext } from '../../../../services/restaurant/restaurants.context';
+import MapSearch from '../../components/MapSearch';
+import RestaurantCallout from '../../components/RestaurantCallout';
 import styles from './MapScreen.styles';
 
-const MapScreen = () => {
+export interface IMapScreenProps extends StackScreenProps<RootStackParamList> {}
+
+const MapScreen: FC<IMapScreenProps> = ({ navigation }) => {
   const {
     location: { lat, lng, viewport },
   } = useContext(LocationContext);
@@ -43,7 +47,10 @@ const MapScreen = () => {
                 latitude: mlat,
                 longitude: mlng,
               }}>
-              <RestaurantCallout restaurant={restaurant} />
+              <RestaurantCallout
+                restaurant={restaurant}
+                onPress={() => navigation.navigate('RestaurantDetail', { restaurant })}
+              />
             </Marker>
           );
         })}
