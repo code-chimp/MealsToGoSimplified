@@ -5,12 +5,12 @@ import { LocationContext } from '../../../../services/location/location.context'
 import styles from './RestaurantSearch.styles';
 
 export interface IRestaurantSearchProps {
-  isFavortesToggled: boolean;
+  isFavoritesToggled: boolean;
   onFavoritesToggle: () => void;
 }
 
 const RestaurantSearch: FC<IRestaurantSearchProps> = ({
-  isFavortesToggled,
+  isFavoritesToggled,
   onFavoritesToggle,
 }) => {
   const { keyword, search } = useContext(LocationContext);
@@ -19,7 +19,7 @@ const RestaurantSearch: FC<IRestaurantSearchProps> = ({
   return (
     <View style={styles.searchContainer}>
       <Searchbar
-        icon={isFavortesToggled ? 'heart' : 'heart-outline'}
+        icon={isFavoritesToggled ? 'heart' : 'heart-outline'}
         onIconPress={onFavoritesToggle}
         placeholder="Search for your city"
         value={searchTerm}

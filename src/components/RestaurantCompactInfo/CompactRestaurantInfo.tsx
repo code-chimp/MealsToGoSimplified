@@ -6,14 +6,18 @@ import styles from './CompactRestaurantInfo.styles';
 
 export interface ICompactRestaurantInfoProps {
   restaurant: IRestaurant;
+  inMap?: boolean;
 }
 
 const isAndroid = Platform.OS === 'android';
 
-const CompactRestaurantInfo: FC<ICompactRestaurantInfoProps> = ({ restaurant }) => {
+const CompactRestaurantInfo: FC<ICompactRestaurantInfoProps> = ({
+  restaurant,
+  inMap = false,
+}) => {
   return (
     <View style={styles.container}>
-      {isAndroid ? (
+      {isAndroid && inMap ? (
         <View style={styles.webviewWrapper}>
           <WebView style={styles.image} source={{ uri: restaurant.photos[0] }} />
         </View>

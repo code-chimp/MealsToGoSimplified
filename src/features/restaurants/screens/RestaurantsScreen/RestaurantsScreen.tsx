@@ -22,7 +22,7 @@ const RestaurantsScreen: FC<IRestaurantsScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <RestaurantSearch
-        isFavortesToggled={isToggled}
+        isFavoritesToggled={isToggled}
         onFavoritesToggle={() => setIsToggled(!isToggled)}
       />
       {isToggled ? (
