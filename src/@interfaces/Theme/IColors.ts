@@ -14,6 +14,7 @@ interface IColors {
       secondary: string;
       disabled: string;
       inverse: string;
+      info: string;
       error: string;
       success: string;
     };

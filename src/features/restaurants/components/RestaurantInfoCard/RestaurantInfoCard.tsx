@@ -6,6 +6,7 @@ import styles from './RestaurantInfoCard.styles';
 import openSvgXml from '../../../../assets/openSvgXml';
 import starSvgXml from '../../../../assets/starSvgXml';
 import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
+import FavoriteButton from '../../../../components/FavoriteButton';
 
 export interface IRestaurantInfoCardProps {
   restaurant: IRestaurant;
@@ -25,6 +26,7 @@ const RestaurantInfoCard: FC<IRestaurantInfoCardProps> = ({ restaurant }) => {
 
   return (
     <Card style={styles.card} elevation={5}>
+      <FavoriteButton restaurant={restaurant} />
       <Card.Cover style={styles.cardImage} key={name} source={{ uri: photos[0] }} />
       <View style={styles.infoWrapper}>
         <Text style={styles.title}>{name}</Text>

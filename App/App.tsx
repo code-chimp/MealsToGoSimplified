@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Lato_400Regular } from '@expo-google-fonts/lato';
 import { Oswald_400Regular } from '@expo-google-fonts/oswald';
+import { FavoritesContextProvider } from '../src/services/favorites/favorites.context';
 import { RestaurantsContextProvider } from '../src/services/restaurant/restaurants.context';
 import { LocationContextProvider } from '../src/services/location/location.context';
 import Navigation from './Navigation';
@@ -29,11 +30,13 @@ const App = () => {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <LocationContextProvider>
-        <RestaurantsContextProvider>
-          <Navigation />
-        </RestaurantsContextProvider>
-      </LocationContextProvider>
+      <FavoritesContextProvider>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Navigation />
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
+      </FavoritesContextProvider>
       <StatusBar style="auto" />
     </View>
   );

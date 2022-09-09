@@ -27,6 +27,7 @@ const theme: ITheme = {
       secondary: '#757575',
       disabled: '#9C9C9C',
       inverse: '#FFFFFF',
+      info: '#2182BD',
       error: '#D0421B',
       success: '#138000',
     },
@@ -43,9 +44,9 @@ const theme: ITheme = {
     h1: 112,
   },
   fontWeights: {
-    regular: 400,
-    medium: 500,
-    bold: 700,
+    regular: '400',
+    medium: '500',
+    bold: '700',
   },
   fonts: {
     body: 'Oswald_400Regular',

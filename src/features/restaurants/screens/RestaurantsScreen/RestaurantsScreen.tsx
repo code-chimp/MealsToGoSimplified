@@ -1,23 +1,33 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Colors } from 'react-native-paper';
-import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
-import RestaurantInfoCard from '../../components/RestaurantInfoCard';
-import { RestaurantsContext } from '../../../../services/restaurant/restaurants.context';
-import theme from '../../../../theme';
-import RestaurantSearch from '../../components/RestaurantSearch';
-import styles from './RestaurantsScreen.styles';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../../App/Navigation/AppTabs/RestaurantNavigator';
+import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
+import { FavoritesContext } from '../../../../services/favorites/favorites.context';
+import { RestaurantsContext } from '../../../../services/restaurant/restaurants.context';
+import theme from '../../../../theme';
+import RestaurantInfoCard from '../../components/RestaurantInfoCard';
+import FavoritesBar from '../../../../components/FavoritesBar';
+import RestaurantSearch from '../../components/RestaurantSearch';
+import styles from './RestaurantsScreen.styles';
 
 export interface IRestaurantsScreenProps extends StackScreenProps<RootStackParamList> {}
 
 const RestaurantsScreen: FC<IRestaurantsScreenProps> = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
+  const { favorites } = useContext(FavoritesContext);
+  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   return (
     <SafeAreaView style={styles.container}>
-      <RestaurantSearch />
+      <RestaurantSearch
+        isFavortesToggled={isToggled}
+        onFavoritesToggle={() => setIsToggled(!isToggled)}
+      />
+      {isToggled ? (
+        <FavoritesBar favorites={favorites} onDetail={navigation.navigate} />
+      ) : null}
       {isLoading ? (
         <View style={styles.loadingIndicator}>
           <ActivityIndicator animating={true} size={theme.sizes.xl} color={Colors.blue300} />
