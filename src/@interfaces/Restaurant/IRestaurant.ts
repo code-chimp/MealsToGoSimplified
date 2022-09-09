@@ -1,19 +1,12 @@
+import ICoords from '../Geo/ICoords';
+
 interface IRestaurant {
   businessStatus?: string;
   geometry: {
-    location: {
-      lat: number;
-      lng: number;
-    };
+    location: ICoords;
     viewport: {
-      northeast: {
-        lat: number;
-        lng: number;
-      };
-      southwest: {
-        lat: number;
-        lng: number;
-      };
+      northeast: ICoords;
+      southwest: ICoords;
     };
   };
   icon?: string;

@@ -15,9 +15,7 @@ export const locationRequest = (city: string): Promise<IGeoLocationResponse> => 
 };
 
 export const locationTransform = ({ results = [] }: IGeoLocationResponse): IMapCoords => {
-  const {
-    geometry: { location },
-  } = results[0];
+  const { geometry } = results[0];
 
-  return location;
+  return { ...geometry.location, viewport: geometry.viewport };
 };

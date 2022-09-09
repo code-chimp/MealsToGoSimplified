@@ -1,11 +1,12 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import { DEFAULT_LOCATION } from '../../constants';
 import IMapCoords from '../../@interfaces/Geo/IMapCoords';
 import { locationRequest, locationTransform } from './location.service';
 
 export interface ILocationContext {
   keyword: string;
   search: (s: string) => void;
-  location: IMapCoords | null;
+  location: IMapCoords;
   isLoading: boolean;
   error: any;
 }
@@ -15,14 +16,14 @@ export const LocationContext = createContext<ILocationContext>({
   search: (s: string) => {
     console.log(s);
   },
-  location: null,
+  location: { ...DEFAULT_LOCATION },
   isLoading: false,
   error: null,
 });
 
 export const LocationContextProvider = ({ children }: { children: ReactNode }) => {
   const [keyword, setKeyword] = useState<string>('San Francisco');
-  const [location, setLocation] = useState<IMapCoords | null>(null);
+  const [location, setLocation] = useState<IMapCoords>({ ...DEFAULT_LOCATION });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 

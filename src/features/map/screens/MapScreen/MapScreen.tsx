@@ -2,50 +2,49 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import MapSearch from '../../components/MapSearch';
-import styles from './MapScreen.styles';
+import RestaurantCallout from '../../components/RestaurantCallout';
 import { LocationContext } from '../../../../services/location/location.context';
 import { RestaurantsContext } from '../../../../services/restaurant/restaurants.context';
-
-interface IRegion {
-  latitude: number;
-  longitude: number;
-  latitudeDelta: number;
-  longitudeDelta: number;
-}
+import styles from './MapScreen.styles';
 
 const MapScreen = () => {
-  const { location } = useContext(LocationContext);
+  const {
+    location: { lat, lng, viewport },
+  } = useContext(LocationContext);
   const { restaurants } = useContext(RestaurantsContext);
-  const [region, setRegion] = useState<IRegion>({
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const [latDelta, setLatDelta] = useState<number>(0);
+  // const [lngDelta, setLngDelta] = useState<number>(0);
 
   useEffect(() => {
-    setRegion({
-      ...region,
-      latitude: location?.lat!,
-      longitude: location?.lng!,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+    const { northeast, southwest } = viewport!;
+
+    setLatDelta(northeast.lat - southwest.lat);
+    // setLngDelta(northeast.lng - southwest.lng);
+  }, [lat, lng, viewport]);
 
   return (
     <View style={styles.container}>
       <MapSearch />
-      <MapView style={styles.map} region={region}>
+      <MapView
+        style={styles.map}
+        region={{
+          latitude: lat,
+          longitude: lng,
+          latitudeDelta: latDelta,
+          longitudeDelta: 0.02,
+        }}>
         {restaurants.map(restaurant => {
-          const { lat, lng } = restaurant.geometry.location;
+          const { lat: mlat, lng: mlng } = restaurant.geometry.location;
           return (
             <Marker
-              key={`mrk:${lat}_${lng}`}
+              key={`${restaurant.name}:${mlat}_${mlng}`}
+              title={restaurant.name}
               coordinate={{
-                latitude: lat,
-                longitude: lng,
-              }}
-            />
+                latitude: mlat,
+                longitude: mlng,
+              }}>
+              <RestaurantCallout restaurant={restaurant} />
+            </Marker>
           );
         })}
       </MapView>

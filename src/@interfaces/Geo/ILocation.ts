@@ -1,11 +1,11 @@
-import IMapCoords from './IMapCoords';
+import ICoords from './ICoords';
 
 interface ILocation {
   geometry: {
-    location: IMapCoords;
+    location: ICoords;
     viewport: {
-      northeast: IMapCoords;
-      southwest: IMapCoords;
+      northeast: ICoords;
+      southwest: ICoords;
     };
   };
 }
