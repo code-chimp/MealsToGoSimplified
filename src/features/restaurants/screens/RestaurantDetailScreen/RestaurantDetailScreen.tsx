@@ -2,12 +2,12 @@ import React, { FC, useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import styles from './RestaurantDetailScreen.styles';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../../../App/Navigation/AppTabs/RestaurantNavigator';
+import { RestaurantStackParamList } from '../../../../../App/Navigation/AppNavigator/RestaurantNavigator';
 import RestaurantInfoCard from '../../components/RestaurantInfoCard';
 import { List } from 'react-native-paper';
 
 export interface IRestaurantDetailScreenProps
-  extends StackScreenProps<RootStackParamList, 'RestaurantDetail'> {}
+  extends StackScreenProps<RestaurantStackParamList, 'RestaurantDetail'> {}
 
 const RestaurantDetailScreen: FC<IRestaurantDetailScreenProps> = ({ route }) => {
   const [breakfastExpanded, setBreakfastExpanded] = useState<boolean>(false);

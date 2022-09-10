@@ -10,11 +10,13 @@ export interface IRestaurantContext {
   error: any;
 }
 
-export const RestaurantsContext = createContext<IRestaurantContext>({
+const defaultState: IRestaurantContext = {
   restaurants: [],
   isLoading: false,
   error: null,
-});
+};
+
+export const RestaurantsContext = createContext<IRestaurantContext>(defaultState);
 
 export const RestaurantsContextProvider = ({ children }: { children: ReactNode }) => {
   const [restaurants, setRestaurants] = useState<Array<IRestaurant>>([]);

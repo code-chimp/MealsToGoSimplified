@@ -9,19 +9,13 @@ export interface IFavoritesContext {
   removeFavorite: (restaurant: IRestaurant) => void;
 }
 
-const FavoritesContextDefault: IFavoritesContext = {
+const defaultState: IFavoritesContext = {
   favorites: [],
-  addFavorite: r => {
-    console.info(r);
-  },
-  removeFavorite: r => {
-    console.info(r);
-  },
+  addFavorite: () => {},
+  removeFavorite: () => {},
 };
 
-export const FavoritesContext = createContext<IFavoritesContext>({
-  ...FavoritesContextDefault,
-});
+export const FavoritesContext = createContext<IFavoritesContext>(defaultState);
 
 export const FavoritesContextProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<Array<IRestaurant>>([]);

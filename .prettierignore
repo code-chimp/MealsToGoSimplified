@@ -14,3 +14,4 @@ LICENSE
 *.snap
 *.txt
 *.back
+.env*

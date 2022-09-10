@@ -4,12 +4,12 @@ import RestaurantsScreen from '../../../src/features/restaurants/screens/Restaur
 import IRestaurant from '../../../src/@interfaces/Restaurant/IRestaurant';
 import RestaurantDetailScreen from '../../../src/features/restaurants/screens/RestaurantDetailScreen';
 
-export type RootStackParamList = {
+export type RestaurantStackParamList = {
   RestaurantList: undefined;
   RestaurantDetail: { restaurant: IRestaurant };
 };
 
-const RestaurantsStack = createStackNavigator<RootStackParamList>();
+const RestaurantsStack = createStackNavigator<RestaurantStackParamList>();
 
 const RestaurantNavigator = () => {
   return (

@@ -4,13 +4,36 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Lato_400Regular } from '@expo-google-fonts/lato';
 import { Oswald_400Regular } from '@expo-google-fonts/oswald';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getApps, initializeApp, FirebaseApp } from 'firebase/app';
+import {
+  getAuth,
+  getReactNativePersistence,
+  initializeAuth,
+  Auth,
+} from 'firebase/auth/react-native';
+import { AuthContextProvider } from '../src/services/authentication/auth.context';
 import { FavoritesContextProvider } from '../src/services/favorites/favorites.context';
-import { RestaurantsContextProvider } from '../src/services/restaurant/restaurants.context';
 import { LocationContextProvider } from '../src/services/location/location.context';
+import { RestaurantsContextProvider } from '../src/services/restaurant/restaurants.context';
 import Navigation from './Navigation';
 import styles from './App.styles';
+import config from '../src/config';
 
+// NOTE: my linter complains, but this is the pattern from the docs
 SplashScreen.preventAutoHideAsync();
+
+let firebaseApp: FirebaseApp;
+let firebaseAuth: Auth;
+
+if (!getApps().length) {
+  firebaseApp = initializeApp(config.firebaseConfig);
+  firebaseAuth = initializeAuth(firebaseApp as FirebaseApp, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });
+} else {
+  firebaseAuth = getAuth();
+}
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -30,13 +53,15 @@ const App = () => {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <FavoritesContextProvider>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <Navigation />
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
-      </FavoritesContextProvider>
+      <AuthContextProvider auth={firebaseAuth}>
+        <FavoritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantsContextProvider>
+              <Navigation />
+            </RestaurantsContextProvider>
+          </LocationContextProvider>
+        </FavoritesContextProvider>
+      </AuthContextProvider>
       <StatusBar style="auto" />
     </View>
   );

@@ -11,15 +11,15 @@ export interface ILocationContext {
   error: any;
 }
 
-export const LocationContext = createContext<ILocationContext>({
+const defaultState: ILocationContext = {
   keyword: 'San Francisco',
-  search: (s: string) => {
-    console.log(s);
-  },
+  search: () => {},
   location: { ...DEFAULT_LOCATION },
   isLoading: false,
   error: null,
-});
+};
+
+export const LocationContext = createContext<ILocationContext>(defaultState);
 
 export const LocationContextProvider = ({ children }: { children: ReactNode }) => {
   const [keyword, setKeyword] = useState<string>('San Francisco');

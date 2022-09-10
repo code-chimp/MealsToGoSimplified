@@ -2,7 +2,7 @@ import React, { FC, useContext, useState } from 'react';
 import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Colors } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../../../App/Navigation/AppTabs/RestaurantNavigator';
+import { RestaurantStackParamList } from '../../../../../App/Navigation/AppNavigator/RestaurantNavigator';
 import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
 import { FavoritesContext } from '../../../../services/favorites/favorites.context';
 import { RestaurantsContext } from '../../../../services/restaurant/restaurants.context';
@@ -12,7 +12,7 @@ import FavoritesBar from '../../../../components/FavoritesBar';
 import RestaurantSearch from '../../components/RestaurantSearch';
 import styles from './RestaurantsScreen.styles';
 
-export interface IRestaurantsScreenProps extends StackScreenProps<RootStackParamList> {}
+export interface IRestaurantsScreenProps extends StackScreenProps<RestaurantStackParamList> {}
 
 const RestaurantsScreen: FC<IRestaurantsScreenProps> = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
