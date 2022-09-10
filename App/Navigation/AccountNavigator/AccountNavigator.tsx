@@ -1,42 +1,25 @@
 import React from 'react';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AccountScreen from '../../../src/features/account/screens/AccountScreen';
+import LoginScreen from '../../../src/features/account/screens/LoginScreen';
+import RegistrationScreen from '../../../src/features/account/screens/RegistrationScreen';
 
-type AccountStackParamList = {
+export type AccountStackParamList = {
   Main: undefined;
   Login: undefined;
+  Register: undefined;
 };
 
 const AccountStack = createStackNavigator<AccountStackParamList>();
 
-const AccountScreen = () => (
-  <View style={styles.container}>
-    <Text>Account Screen</Text>
-  </View>
-);
-
-const LoginScreen = () => (
-  <View style={styles.container}>
-    <Text>Account Screen</Text>
-  </View>
-);
-
 const AccountNavigator = () => {
   return (
-    <AccountStack.Navigator
-      screenOptions={{ ...TransitionPresets.ModalPresentationIOS, headerShown: false }}>
+    <AccountStack.Navigator screenOptions={{ headerShown: false }}>
       <AccountStack.Screen name="Main" component={AccountScreen} />
       <AccountStack.Screen name="Login" component={LoginScreen} />
+      <AccountStack.Screen name="Register" component={RegistrationScreen} />
     </AccountStack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default AccountNavigator;

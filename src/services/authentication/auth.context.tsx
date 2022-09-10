@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react';
+import { FirebaseError } from 'firebase/app';
 import { Auth, UserCredential } from 'firebase/auth';
 import { loginRequest } from './auth.service';
 
@@ -30,19 +31,28 @@ export const AuthContextProvider = ({
   const [error, setError] = useState<any>(null);
 
   const onLogin = async (email: string, password: string): Promise<void> => {
-    setIsAuthenticated(true);
-
-    try {
-      const credential = await loginRequest(auth, email, password);
-
-      setUser(credential);
+    if (email.trim().length && password.trim().length) {
       setIsAuthenticated(false);
-    } catch (e) {
-      console.error(e);
-      setError(e);
-    }
+      setError(null);
 
-    setIsAuthenticated(false);
+      try {
+        const credential = await loginRequest(auth, email, password);
+
+        setUser(credential);
+        setIsAuthenticated(true);
+      } catch (e) {
+        let errorMessage =
+          (e as FirebaseError).message
+            ?.replace('Firebase: Error (auth/', '')
+            .replace(').', '') ?? 'unexpected server error';
+
+        setError(errorMessage);
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    } else {
+      setError('enter an email and password to continue');
+    }
   };
 
   return (
