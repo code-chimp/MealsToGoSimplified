@@ -1,9 +1,10 @@
 import React, { FC, useContext, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import theme from '../../../../theme';
 import { AccountStackParamList } from '../../../../../App/Navigation/AccountNavigator/AccountNavigator';
+import ErrorDisplay from '../../../../components/ErrorDisplay';
 import { AuthContext } from '../../../../services/authentication/auth.context';
 import AccountBackground from '../../components/AccountBackground';
 import styles from './LoginScreen.styles';
@@ -35,7 +36,7 @@ const LoginScreen: FC<ILoginScreenProps> = ({ navigation }) => {
           value={password}
           onChangeText={t => setPassword(t)}
         />
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        {error ? <ErrorDisplay errorText={error} /> : null}
         <Button
           icon="lock-open-outline"
           style={[styles.button, styles.topSpace]}
