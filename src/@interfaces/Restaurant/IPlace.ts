@@ -1,4 +1,4 @@
-interface IRestaurantDto {
+interface IPlace {
   business_status?: string;
   geometry: {
     location: {
@@ -34,4 +34,4 @@ interface IRestaurantDto {
   vicinity: string;
 }
 
-export default IRestaurantDto;
+export default IPlace;

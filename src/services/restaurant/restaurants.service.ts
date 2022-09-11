@@ -1,11 +1,11 @@
 import camelize from 'camelize-ts';
-import IRestaurantsResponse from '../../@interfaces/Restaurant/IRestaurantsResponse';
-import IRestaurantDto from '../../@interfaces/Restaurant/IRestaurantDto';
+import IPlacesResponse from '../../@interfaces/Restaurant/IPlacesResponse';
+import IPlace from '../../@interfaces/Restaurant/IPlace';
 import IRestaurant from '../../@interfaces/Restaurant/IRestaurant';
 import config from '../../config';
 import ICloudFunctionPayload from '../../@interfaces/ICloudFunctionPayload';
 
-export const restaurantsRequest = async (location: string): Promise<IRestaurantsResponse> => {
+export const restaurantsRequest = async (location: string): Promise<IPlacesResponse> => {
   try {
     const response = await fetch(
       `${config.cloudFunctionBaseUri}/placesNearby?location=${encodeURI(location)}`,
@@ -13,7 +13,7 @@ export const restaurantsRequest = async (location: string): Promise<IRestaurants
     const payload: ICloudFunctionPayload = await response.json();
 
     if (payload.status === 'ok') {
-      return payload.data as IRestaurantsResponse;
+      return payload.data as IPlacesResponse;
     }
 
     throw new Error(payload.message ?? 'unknown server error');
@@ -22,9 +22,9 @@ export const restaurantsRequest = async (location: string): Promise<IRestaurants
   }
 };
 
-export const restaurantsTransform = ({ results = [] }: IRestaurantsResponse) => {
-  return results.map((restaurant: IRestaurantDto): IRestaurant => {
-    const camelRestaurant = camelize<IRestaurantDto>(restaurant);
+export const restaurantsTransform = ({ results = [] }: IPlacesResponse) => {
+  return results.map((restaurant: IPlace): IRestaurant => {
+    const camelRestaurant = camelize<IPlace>(restaurant);
 
     return {
       ...camelRestaurant,
