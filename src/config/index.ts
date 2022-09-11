@@ -1,5 +1,7 @@
 import { FirebaseOptions } from 'firebase/app';
 import {
+  CLOUD_FUNCTION_REGION,
+  CLOUD_FUNCTION_SERVER,
   FBASE_APIKEY,
   FBASE_APPID,
   FBASE_AUTHDOMAIN,
@@ -10,9 +12,10 @@ import {
 
 export interface IConfig {
   firebaseConfig: FirebaseOptions;
+  cloudFunctionBaseUri: string;
 }
 
-const config = {
+const config: IConfig = {
   firebaseConfig: {
     apiKey: FBASE_APIKEY,
     authDomain: FBASE_AUTHDOMAIN,
@@ -21,6 +24,7 @@ const config = {
     messagingSenderId: FBASE_MESSAGINGSENDERID,
     appId: FBASE_APPID,
   },
+  cloudFunctionBaseUri: `${CLOUD_FUNCTION_SERVER}/${FBASE_PROJECTID}/${CLOUD_FUNCTION_REGION}`,
 };
 
 export default config;

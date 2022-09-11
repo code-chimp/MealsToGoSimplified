@@ -1,4 +1,4 @@
-interface IApiRestaurant {
+interface IRestaurantDto {
   business_status?: string;
   geometry: {
     location: {
@@ -34,4 +34,4 @@ interface IApiRestaurant {
   vicinity: string;
 }
 
-export default IApiRestaurant;
+export default IRestaurantDto;

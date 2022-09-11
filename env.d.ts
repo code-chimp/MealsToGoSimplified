@@ -5,4 +5,6 @@ declare module '@env' {
   export const FBASE_STORAGEBUCKET: string;
   export const FBASE_MESSAGINGSENDERID: string;
   export const FBASE_APPID: string;
+  export const CLOUD_FUNCTION_SERVER: string;
+  export const CLOUD_FUNCTION_REGION: string;
 }

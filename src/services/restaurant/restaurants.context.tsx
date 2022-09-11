@@ -26,18 +26,17 @@ export const RestaurantsContextProvider = ({ children }: { children: ReactNode }
 
   const retrieveRestaurants = (coords: string) => {
     setIsLoading(true);
-    setTimeout(() => {
-      restaurantsRequest(coords)
-        .then(restaurantsTransform)
-        .then((rs: Array<IRestaurant>) => {
-          setRestaurants(rs);
-          setIsLoading(false);
-        })
-        .catch((err: any) => {
-          setError(err);
-          setIsLoading(false);
-        });
-    }, 2000);
+
+    restaurantsRequest(coords)
+      .then(restaurantsTransform)
+      .then((rs: Array<IRestaurant>) => {
+        setRestaurants(rs);
+        setIsLoading(false);
+      })
+      .catch((err: any) => {
+        setError(err);
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {

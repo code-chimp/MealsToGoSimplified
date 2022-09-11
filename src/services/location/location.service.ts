@@ -1,17 +1,23 @@
-import geoLocations from '../../@mocks/geoLocations';
 import IGeoLocationResponse from '../../@interfaces/Geo/IGeoLocationResponse';
+import config from '../../config';
 import IMapCoords from '../../@interfaces/Geo/IMapCoords';
+import ICloudFunctionPayload from '../../@interfaces/ICloudFunctionPayload';
 
-export const locationRequest = (city: string): Promise<IGeoLocationResponse> => {
-  return new Promise((resolve, reject) => {
-    const response = geoLocations[city];
+export const locationRequest = async (city: string): Promise<IGeoLocationResponse> => {
+  try {
+    const response = await fetch(
+      `${config.cloudFunctionBaseUri}/geocode?city=${encodeURI(city)}`,
+    );
+    const payload: ICloudFunctionPayload = await response.json();
 
-    if (!response) {
-      reject('not found');
+    if (payload.status === 'ok') {
+      return payload.data as IGeoLocationResponse;
     }
 
-    resolve(response);
-  });
+    throw new Error(payload.message ?? 'unknown server error');
+  } catch (e) {
+    throw new Error(`server error ${e}`);
+  }
 };
 
 export const locationTransform = ({ results = [] }: IGeoLocationResponse): IMapCoords => {

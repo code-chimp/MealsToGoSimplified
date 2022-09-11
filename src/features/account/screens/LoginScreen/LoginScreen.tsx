@@ -49,7 +49,7 @@ const LoginScreen: FC<ILoginScreenProps> = ({ navigation }) => {
         style={styles.backButton}
         mode="contained"
         color={theme.colors.brand.primary}
-        onPress={() => navigation.navigate('Main')}>
+        onPress={() => navigation.goBack()}>
         Back
       </Button>
     </AccountBackground>

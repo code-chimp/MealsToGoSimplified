@@ -1,28 +1,30 @@
 import camelize from 'camelize-ts';
-import IRestaurantsApiResponse from '../../@interfaces/Restaurant/IRestaurantsApiResponse';
-import IApiRestaurant from '../../@interfaces/Restaurant/IApiRestaurant';
+import IRestaurantsResponse from '../../@interfaces/Restaurant/IRestaurantsResponse';
+import IRestaurantDto from '../../@interfaces/Restaurant/IRestaurantDto';
 import IRestaurant from '../../@interfaces/Restaurant/IRestaurant';
-import { restaurantsApiResponses, mockImages } from '../../@mocks/restaurantsApiResponses';
+import config from '../../config';
+import ICloudFunctionPayload from '../../@interfaces/ICloudFunctionPayload';
 
-export const restaurantsRequest = (location: string): Promise<IRestaurantsApiResponse> => {
-  return new Promise((resolve, reject) => {
-    const response = restaurantsApiResponses[location];
+export const restaurantsRequest = async (location: string): Promise<IRestaurantsResponse> => {
+  try {
+    const response = await fetch(
+      `${config.cloudFunctionBaseUri}/placesNearby?location=${encodeURI(location)}`,
+    );
+    const payload: ICloudFunctionPayload = await response.json();
 
-    if (!response) {
-      reject('not found');
+    if (payload.status === 'ok') {
+      return payload.data as IRestaurantsResponse;
     }
 
-    resolve(response);
-  });
+    throw new Error(payload.message ?? 'unknown server error');
+  } catch (e) {
+    throw new Error(`server error ${e}`);
+  }
 };
 
-export const restaurantsTransform = ({ results = [] }: IRestaurantsApiResponse) => {
-  return results.map((restaurant: IApiRestaurant): IRestaurant => {
-    const camelRestaurant = camelize<IApiRestaurant>(restaurant);
-
-    camelRestaurant.photos = camelRestaurant.photos.map(() => {
-      return mockImages[Math.ceil(Math.random() * mockImages.length - 1)];
-    });
+export const restaurantsTransform = ({ results = [] }: IRestaurantsResponse) => {
+  return results.map((restaurant: IRestaurantDto): IRestaurant => {
+    const camelRestaurant = camelize<IRestaurantDto>(restaurant);
 
     return {
       ...camelRestaurant,
