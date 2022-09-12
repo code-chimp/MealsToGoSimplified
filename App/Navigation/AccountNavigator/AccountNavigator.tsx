@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import AccountScreen from '../../../src/features/account/screens/AccountScreen';
 import LoginScreen from '../../../src/features/account/screens/LoginScreen';
-import RegistrationScreen from '../../../src/features/account/screens/RegistrationScreen';
+import RegisterScreen from '../../../src/features/account/screens/RegisterScreen';
 
 export type AccountStackParamList = {
   Main: undefined;
@@ -17,7 +17,7 @@ const AccountNavigator = () => {
     <AccountStack.Navigator screenOptions={{ headerShown: false }}>
       <AccountStack.Screen name="Main" component={AccountScreen} />
       <AccountStack.Screen name="Login" component={LoginScreen} />
-      <AccountStack.Screen name="Register" component={RegistrationScreen} />
+      <AccountStack.Screen name="Register" component={RegisterScreen} />
     </AccountStack.Navigator>
   );
 };

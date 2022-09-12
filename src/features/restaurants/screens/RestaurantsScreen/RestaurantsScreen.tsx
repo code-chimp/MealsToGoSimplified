@@ -9,12 +9,14 @@ import { FavoritesContext } from '../../../../services/favorites/favorites.conte
 import { RestaurantsContext } from '../../../../services/restaurant/restaurants.context';
 import { LocationContext } from '../../../../services/location/location.context';
 import theme from '../../../../theme';
-import RestaurantInfoCard from '../../components/RestaurantInfoCard';
+import RestaurantInfoCard from '../../../../components/RestaurantInfoCard';
 import FavoritesBar from '../../../../components/FavoritesBar';
 import RestaurantSearch from '../../components/RestaurantSearch';
 import styles from './RestaurantsScreen.styles';
+import FadeInView from '../../../../components/FadeInView';
 
-export interface IRestaurantsScreenProps extends StackScreenProps<RestaurantStackParamList> {}
+export interface IRestaurantsScreenProps
+  extends StackScreenProps<RestaurantStackParamList, 'RestaurantList'> {}
 
 const RestaurantsScreen: FC<IRestaurantsScreenProps> = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
@@ -36,7 +38,7 @@ const RestaurantsScreen: FC<IRestaurantsScreenProps> = ({ navigation }) => {
           <ActivityIndicator animating={true} size={theme.sizes.xl} color={Colors.blue300} />
         </View>
       ) : (
-        <>
+        <FadeInView>
           {!!error || !!locationError ? (
             <ErrorDisplay errorText="Sorry, something went wrong retrieving your data." />
           ) : null}
@@ -55,7 +57,7 @@ const RestaurantsScreen: FC<IRestaurantsScreenProps> = ({ navigation }) => {
               );
             }}
           />
-        </>
+        </FadeInView>
       )}
     </SafeAreaView>
   );

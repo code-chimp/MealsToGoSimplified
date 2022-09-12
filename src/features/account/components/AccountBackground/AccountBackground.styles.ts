@@ -15,6 +15,14 @@ const styles = StyleSheet.create({
     paddingLeft: theme.space.lg,
     paddingRight: theme.space.lg,
   },
+  animationWrapper: {
+    position: 'absolute',
+    top: 30,
+    padding: theme.space.sm,
+    height: '40%',
+    width: '100%',
+    alignSelf: 'center',
+  },
   title: {
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizes.h4,

@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unstable-nested-components */
+/* NOTE: this is due to the suggested pattern for adding tab icons */
 import React, { FC, useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import styles from './RestaurantDetailScreen.styles';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RestaurantStackParamList } from '../../../../../App/Navigation/AppNavigator/RestaurantNavigator';
-import RestaurantInfoCard from '../../components/RestaurantInfoCard';
+import RestaurantInfoCard from '../../../../components/RestaurantInfoCard';
 import { List } from 'react-native-paper';
 
 export interface IRestaurantDetailScreenProps

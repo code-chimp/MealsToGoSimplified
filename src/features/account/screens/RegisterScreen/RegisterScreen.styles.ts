@@ -6,18 +6,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     padding: theme.space.lg,
     marginTop: theme.space.sm,
-    borderRadius: 8,
+  },
+  topSpace: {
+    marginTop: theme.space.sm,
   },
   button: {
     padding: theme.space.xs,
   },
-  marginTopMed: {
+  backButton: {
+    padding: theme.space.sm,
+    alignSelf: 'center',
     marginTop: theme.space.md,
-  },
-  loadingIndicator: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

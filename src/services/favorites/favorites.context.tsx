@@ -1,7 +1,8 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import IRestaurant from '../../@interfaces/Restaurant/IRestaurant';
 import { FAVORITES_STORAGE_KEY } from '../../constants';
+import { AuthContext } from '../authentication/auth.context';
 
 export interface IFavoritesContext {
   favorites: Array<IRestaurant>;
@@ -19,18 +20,20 @@ export const FavoritesContext = createContext<IFavoritesContext>(defaultState);
 
 export const FavoritesContextProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<Array<IRestaurant>>([]);
+  const { user } = useContext(AuthContext);
 
-  const storeFavorites = async (data: Array<IRestaurant>): Promise<void> => {
+  const storeFavorites = async (data: Array<IRestaurant>, uid: string): Promise<void> => {
     try {
-      await AsyncStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(data));
+      await AsyncStorage.setItem(`${FAVORITES_STORAGE_KEY}_${uid}`, JSON.stringify(data));
     } catch (e) {
       console.error('error storing favorites', e);
     }
   };
 
-  const loadFavorites = async (): Promise<void> => {
+  const loadFavorites = async (uid: string): Promise<void> => {
     try {
-      const items = await AsyncStorage.getItem(FAVORITES_STORAGE_KEY);
+      const items = await AsyncStorage.getItem(`${FAVORITES_STORAGE_KEY}_${uid}`);
+
       if (items !== null) {
         setFavorites(JSON.parse(items));
       }
@@ -49,12 +52,16 @@ export const FavoritesContextProvider = ({ children }: { children: ReactNode }) 
   };
 
   useEffect(() => {
-    loadFavorites();
-  }, []);
+    if (user) {
+      loadFavorites(user.uid);
+    }
+  }, [user]);
 
   useEffect(() => {
-    storeFavorites(favorites);
-  }, [favorites]);
+    if (user) {
+      storeFavorites(favorites, user.uid);
+    }
+  }, [favorites, user]);
 
   return (
     <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite }}>

@@ -13,9 +13,6 @@ import {
   Auth,
 } from 'firebase/auth/react-native';
 import { AuthContextProvider } from '../src/services/authentication/auth.context';
-import { FavoritesContextProvider } from '../src/services/favorites/favorites.context';
-import { LocationContextProvider } from '../src/services/location/location.context';
-import { RestaurantsContextProvider } from '../src/services/restaurant/restaurants.context';
 import Navigation from './Navigation';
 import styles from './App.styles';
 import config from '../src/config';
@@ -54,13 +51,7 @@ const App = () => {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <AuthContextProvider auth={firebaseAuth}>
-        <FavoritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavoritesContextProvider>
+        <Navigation />
       </AuthContextProvider>
       <StatusBar style="auto" />
     </View>

@@ -7,14 +7,15 @@ import { AccountStackParamList } from '../../../../../App/Navigation/AccountNavi
 import ErrorDisplay from '../../../../components/ErrorDisplay';
 import { AuthContext } from '../../../../services/authentication/auth.context';
 import AccountBackground from '../../components/AccountBackground';
-import styles from './LoginScreen.styles';
+import styles from './RegisterScreen.styles';
 
 export interface ILoginScreenProps extends StackScreenProps<AccountStackParamList> {}
 
-const LoginScreen: FC<ILoginScreenProps> = ({ navigation }) => {
-  const { isLoading, onLogin, error } = useContext(AuthContext);
+const RegisterScreen: FC<ILoginScreenProps> = ({ navigation }) => {
+  const { isLoading, onRegister, error } = useContext(AuthContext);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [matchPassword, setMatchPassword] = useState<string>('');
 
   return (
     <AccountBackground>
@@ -26,7 +27,6 @@ const LoginScreen: FC<ILoginScreenProps> = ({ navigation }) => {
           autoCapitalize="none"
           value={email}
           onChangeText={t => setEmail(t)}
-          disabled={isLoading}
         />
         <TextInput
           label="Password"
@@ -36,17 +36,25 @@ const LoginScreen: FC<ILoginScreenProps> = ({ navigation }) => {
           autoCapitalize="none"
           value={password}
           onChangeText={t => setPassword(t)}
-          disabled={isLoading}
+        />
+        <TextInput
+          label="Repeat Password"
+          style={styles.topSpace}
+          textContentType="password"
+          secureTextEntry
+          autoCapitalize="none"
+          value={matchPassword}
+          onChangeText={t => setMatchPassword(t)}
         />
         {error ? <ErrorDisplay errorText={error} /> : null}
         {!isLoading ? (
           <Button
-            icon="lock-open-outline"
+            icon="email"
             style={[styles.button, styles.topSpace]}
             mode="contained"
             color={theme.colors.brand.primary}
-            onPress={() => onLogin(email, password)}>
-            Login
+            onPress={() => onRegister(email, password, matchPassword)}>
+            Register
           </Button>
         ) : (
           <ActivityIndicator color={Colors.blue300} animating />
@@ -64,4 +72,4 @@ const LoginScreen: FC<ILoginScreenProps> = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

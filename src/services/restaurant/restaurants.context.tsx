@@ -40,7 +40,9 @@ export const RestaurantsContextProvider = ({ children }: { children: ReactNode }
   };
 
   useEffect(() => {
-    retrieveRestaurants(`${location?.lat},${location?.lng}`);
+    if (location) {
+      retrieveRestaurants(`${location?.lat},${location?.lng}`);
+    }
   }, [location]);
 
   return (

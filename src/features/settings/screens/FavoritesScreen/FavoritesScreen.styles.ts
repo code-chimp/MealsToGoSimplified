@@ -6,20 +6,18 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: StatusBar.currentHeight,
   },
-  avatarWrapper: {
+  emptyListContainer: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  avatar: {
-    backgroundColor: '#2182bd',
-  },
-  avatarText: {
+  emptyPrompt: {
     fontFamily: theme.fonts.body,
-    fontSize: theme.fontSizes.title,
-    marginTop: theme.space.sm,
+    fontSize: theme.fontSizes.h5,
+    alignSelf: 'center',
   },
-  listItem: {
-    padding: theme.space.md,
-  },
+  favoritesList: { padding: theme.space.md },
 });
 
 export default styles;

@@ -3,10 +3,10 @@ import { Image, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import styles from './RestaurantInfoCard.styles';
-import openSvgXml from '../../../../assets/openSvgXml';
-import starSvgXml from '../../../../assets/starSvgXml';
-import IRestaurant from '../../../../@interfaces/Restaurant/IRestaurant';
-import FavoriteButton from '../../../../components/FavoriteButton';
+import openSvgXml from '../../assets/openSvgXml';
+import starSvgXml from '../../assets/starSvgXml';
+import IRestaurant from '../../@interfaces/Restaurant/IRestaurant';
+import FavoriteButton from '../FavoriteButton';
 
 export interface IRestaurantInfoCardProps {
   restaurant: IRestaurant;
