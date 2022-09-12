@@ -13,8 +13,8 @@ import styles from './FavoritesScreen.styles';
 
 export interface IFavoritesScreenProps
   extends CompositeScreenProps<
-    BottomTabScreenProps<RootBottomTabParamList, 'SettingsNav'>,
-    StackScreenProps<SettingsStackParamList>
+    StackScreenProps<SettingsStackParamList>,
+    BottomTabScreenProps<RootBottomTabParamList, 'SettingsNav'>
   > {}
 
 const FavoritesScreen: FC<IFavoritesScreenProps> = ({ navigation }) => {

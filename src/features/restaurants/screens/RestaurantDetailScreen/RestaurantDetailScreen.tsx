@@ -6,7 +6,7 @@ import styles from './RestaurantDetailScreen.styles';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RestaurantStackParamList } from '../../../../../App/Navigation/AppNavigator/RestaurantNavigator';
 import RestaurantInfoCard from '../../../../components/RestaurantInfoCard';
-import { List } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
 
 export interface IRestaurantDetailScreenProps
   extends StackScreenProps<RestaurantStackParamList, 'RestaurantDetail'> {}
@@ -35,6 +35,7 @@ const RestaurantDetailScreen: FC<IRestaurantDetailScreenProps> = ({ route }) => 
           onPress={handleBreakfastPress}
           left={props => <List.Icon icon="bread-slice" {...props} />}>
           <List.Item title="Eggs Benedict" />
+          <Divider />
           <List.Item title="Classic Breakfast" />
         </List.Accordion>
         <List.Accordion
@@ -43,7 +44,9 @@ const RestaurantDetailScreen: FC<IRestaurantDetailScreenProps> = ({ route }) => 
           onPress={handleLunchPress}
           left={props => <List.Icon icon="hamburger" {...props} />}>
           <List.Item title="Burger w/ Fries" />
+          <Divider />
           <List.Item title="Steak Sandwich" />
+          <Divider />
           <List.Item title="Beer Cheese Soup" />
         </List.Accordion>
         <List.Accordion
@@ -52,7 +55,9 @@ const RestaurantDetailScreen: FC<IRestaurantDetailScreenProps> = ({ route }) => 
           onPress={handleDinnerPress}
           left={props => <List.Icon icon="food-variant" {...props} />}>
           <List.Item title="Chicken Alfredo" />
+          <Divider />
           <List.Item title="Veal Parmigiana" />
+          <Divider />
           <List.Item title="French Onion Soup" />
         </List.Accordion>
         <List.Accordion
@@ -61,9 +66,13 @@ const RestaurantDetailScreen: FC<IRestaurantDetailScreenProps> = ({ route }) => 
           onPress={handleDrinksPress}
           left={props => <List.Icon icon="cup" {...props} />}>
           <List.Item title="Coffee" />
+          <Divider />
           <List.Item title="Tea" />
+          <Divider />
           <List.Item title="Pepsi" />
+          <Divider />
           <List.Item title="Slice" />
+          <Divider />
           <List.Item title="Lemonade" />
         </List.Accordion>
       </ScrollView>

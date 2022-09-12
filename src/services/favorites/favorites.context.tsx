@@ -24,7 +24,7 @@ export const FavoritesContextProvider = ({ children }: { children: ReactNode }) 
 
   const storeFavorites = async (data: Array<IRestaurant>, uid: string): Promise<void> => {
     try {
-      await AsyncStorage.setItem(`${FAVORITES_STORAGE_KEY}_${uid}`, JSON.stringify(data));
+      await AsyncStorage.setItem(`${FAVORITES_STORAGE_KEY}${uid}`, JSON.stringify(data));
     } catch (e) {
       console.error('error storing favorites', e);
     }
@@ -32,7 +32,7 @@ export const FavoritesContextProvider = ({ children }: { children: ReactNode }) 
 
   const loadFavorites = async (uid: string): Promise<void> => {
     try {
-      const items = await AsyncStorage.getItem(`${FAVORITES_STORAGE_KEY}_${uid}`);
+      const items = await AsyncStorage.getItem(`${FAVORITES_STORAGE_KEY}${uid}`);
 
       if (items !== null) {
         setFavorites(JSON.parse(items));

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    backgroundColor: '#2182bd',
+    backgroundColor: theme.colors.brand.primary,
   },
   avatarText: {
     fontFamily: theme.fonts.body,

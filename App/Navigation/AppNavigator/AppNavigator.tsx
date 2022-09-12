@@ -27,8 +27,8 @@ const AppNavigator = () => {
         <RestaurantsContextProvider>
           <Tab.Navigator
             screenOptions={{
-              tabBarActiveTintColor: theme.colors.ui.activeIcon,
-              tabBarInactiveTintColor: theme.colors.ui.inactiveIcon,
+              tabBarActiveTintColor: theme.colors.brand.primary,
+              tabBarInactiveTintColor: theme.colors.brand.muted,
               headerShown: false,
             }}>
             <Tab.Screen
